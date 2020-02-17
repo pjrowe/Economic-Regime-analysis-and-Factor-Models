@@ -31,7 +31,7 @@ bigmacro=bigmacro.iloc[:-1,]
 
 ts=time.localtime()
 day= time.strftime('%Y-%m-%d', ts)
-bigmacro.to_csv('current '+day+'.csv')
+bigmacro.to_csv('current_'+day+'.csv')
 
 Recession_periods=pd.read_csv('Recession_Periods.csv')
 regime = np.append(Recession_periods['Regime'].values,np.array(['Normal']*11))
@@ -122,4 +122,7 @@ df.insert(loc=0, column="Date", value=bigmacro['Date'].values)
 df.insert(loc=1, column='Regime', value=bigmacro['Regime'].values)
 df.shape
 
-df.to_csv('current_cleaned '+day+'.csv', index=False)
+df.to_csv('current_cleaned_'+day+'.csv', index=False)
+
+
+# making this file executable at console / command line
