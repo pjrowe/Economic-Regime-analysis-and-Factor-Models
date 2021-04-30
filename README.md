@@ -7,7 +7,7 @@ There are four main parts of this project:
 1. Data Loading and Cleaning
 2. Regime Classification / Prediction from Economic Indicators 
 3. Scenario Simulations and MultiPeriod Optimization
-4. Factor Model of Market Returns
+4. Factor Model of Market Return
 
 ### Data Loading and Cleaning
 
