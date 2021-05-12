@@ -21,13 +21,13 @@ That leaves Course 3, which was split into 5 modules / weeks.  This Course did h
 4. Machine learning techniques for regime analysis (Module 4 folder in repo)
 5. Identifying recessions, crash regimes and feature selection (Module 5 folder)
 
-Week 2 and Week 3 were again, in my estimation, is a bit too high level for me.  Rebalancing a large amount of money across asset classes or invidual stocks could be guided by such techniques, but this occurs at large funds / companies.  
+Week 2 and Week 3 were again, in my estimation, a bit too high level for me.  Rebalancing a large amount of money across asset classes or invidual stocks could be guided by such techniques, but this occurs at large funds / companies.  
 
 The topics of Week 4 were as follows: Portfolio Decisions with Time-Varying Market Conditions, Trend filtering, A scenario-based portfolio model, A two regime portfolio example, A multi regime model for a University Endowment.  The two-regime portfolio was more my speed than a multi-regime model for an endowment.  Thus, I focused on Week 5, trying to use ML models to analyze and identify / predict a recession using publicly available economic data.  It would be easy to take a position in the SP500 emini futures (very liquid, tax advantageous, low commissions) as my 'portfolio' in anticipation of a major stock correction / recession.  
 
 Then Covid hit, and a sudden recession without precedent.  So much for model building.  And then an unprecedented coordinated stimulus by Central Banks worldwide, leading to an all-time high in market multiples.  Again, so much for building models on the past data when the Fed was pumping $100 billion daily into the markets.  In addition, this all happened within 4-6 weeks top to bottom and back.  So, how useful could monthly economic indicators be?   
 
-Anyway, I've updated this as a refresher, but as a practical method for a small fish to position in the markets, no, I don't think it is a useful exercise.  
+Anyway, I've updated this as a refresher, but as a practical method for a small fish to position in the markets, no, I don't think it is a useful exercise.  Is it any wonder so many short seller funds and value portfolio managers have closed or retired?  The market is a mania and has been one for a long time, with no end in sight.  Druckenmiller, Michael Burry, Chanos, Einhorn, Fleckenstein, and the list goes on and on.  
 
 -------
 
