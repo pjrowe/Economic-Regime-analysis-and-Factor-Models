@@ -4,10 +4,10 @@ This repository contains my work related to the EDHEC Business School specializa
 
 The Specialization is comprised of four courses. https://www.coursera.org/specializations/investment-management-python-machine-learning#courses
 
-1. Introduction to Portfolio Construction and Analysis with Python
-2. Advanced Portfolio Construction and Analysis with Python
-3. Python and Machine Learning for Asset Management
-4. Python and Machine-Learning for Asset Management with Alternative Data Sets
+- Course 1. Introduction to Portfolio Construction and Analysis with Python
+- Course 2. Advanced Portfolio Construction and Analysis with Python
+- Course 3. Python and Machine Learning for Asset Management
+- Course 4. Python and Machine-Learning for Asset Management with Alternative Data Sets
 
 Course 2 was too high level and general for a one person investor/trader.  The theory is quite interesting, though, and I realized after this course that the practice of portfolio management has been largely automated (think ETFs) and things like portfolio rebalancing could be accomplished with the click of a button, after all the theory has been implemented.  Thus, Course 2 did not have much for me to try to use, unless I intended to work for a large asset management firm as part of a massive team.  That was my impression, at least.
 
@@ -15,11 +15,11 @@ Course 4 had some interesting applications of machine learning to investment pro
 
 That leaves Course 3, which was split into 5 modules / weeks.  This Course did have some promise for application of a small trader / investor.
 
-1. Introducing the fundamentals of machine learning (background, nothing included in repo)
-2. Machine learning techniques for robust estimation of factor models (Module 2 folder in repo)
-3. Machine learning techniques for efficient portfolio diversification
-4. Machine learning techniques for regime analysis (Module 4 folder in repo)
-5. Identifying recessions, crash regimes and feature selection (Module 5 folder)
+- Week / Module 1. Introducing the fundamentals of machine learning (background, nothing included in repo)
+- Week / Module 2. Machine learning techniques for robust estimation of factor models (Module 2 folder in repo)
+- Week / Module 3. Machine learning techniques for efficient portfolio diversification
+- Week / Module 4. Machine learning techniques for regime analysis (Module 4 folder in repo)
+- Week / Module 5. Identifying recessions, crash regimes and feature selection (Module 5 folder)
 
 Week 2 and Week 3 were again, in my estimation, a bit too high level for me.  Rebalancing a large amount of money across asset classes or invidual stocks could be guided by such techniques, but this occurs at large funds / companies.  
 
