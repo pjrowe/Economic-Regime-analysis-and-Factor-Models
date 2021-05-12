@@ -1,6 +1,6 @@
 ## Summary
 
-This repository contains my work related to the EDHEC Business School specialization *Python and Machine Learning for Asset Management* on Coursera (https://www.coursera.org/account/accomplishments/verify/R5NTFNMF67P4).  I have extended and adapted the base of code provided in the course for my own education and investing and trading activities at Crivano Capital. 
+This repository contains my work related to the EDHEC Business School specialization **Investment Management with Python and Machine Learning Specialization** on Coursera (https://www.coursera.org/account/accomplishments/verify/R5NTFNMF67P4).  I have extended and adapted the base of code provided in the course for my own education and investing and trading activities at Crivano Capital in the **Other work** folder. 
 
 The Specialization is comprised of four courses. https://www.coursera.org/specializations/investment-management-python-machine-learning#courses
 
