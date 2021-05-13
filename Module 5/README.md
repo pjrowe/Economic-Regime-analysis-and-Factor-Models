@@ -10,6 +10,12 @@ This folder is for "Module 5: Regime Prediction with Machine Learning". The nece
 
 ```regimeplot.py``` Custom plotting function with regimes
 
+```2021_03_Part1.ipynb``` Updated May 13, 2021 for most recent macro data (March 2021)
+
+```2021_03_Part2.ipynb``` ditto
+
+```2021_03_Part3.ipynb``` ditto
+
 ## data
 
 This folder includes the dataset that are used in the analysis.  Dated files will have the data that is used in the corresponding dated notebooks above (e.g., 2021_03_Part1.ipynb will use macro data updated up to March 2021, with SP500 price for end of March 2021, and recession status for March 2021).  The last run date was May 13, 2021, but this was based on the most up-to-date macro data from the Fed, in March 2021.  Although the Random Forest and XGBoost models were considerably better than the linear regression models across all four out-of-sample error metrics, and even though RF and XGB models called for a recession (the LR models had very low probability for recession), the closing price of the S&P rose 6.5% from 3973 on March 31 to 4233 on May 7 (another record high).  There has been roughly a 3% pullback the last few days, to 4120 intraday as of May 13.  
