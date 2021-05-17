@@ -105,6 +105,25 @@ class RegimePlot:
         plt.show()
 
 
+def plot_data(date, df_raw, df_xform, col):
+    plt.figure(figsize=(18, 6))
+    plt.xlabel(' ')
+    plt.ylabel(' ')
+    plt.plot(date, df_raw.iloc[15:, col], label='Raw')
+    plt.title(df_raw.columns[col], fontsize=18)
+    plt.show()
+
+    plt.figure(figsize=(18, 6))
+    plt.xlabel(' ')
+    plt.ylabel(' ')
+    plt.plot(date, df_xform.iloc[:, col], label='Transformed')
+    # plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.16),
+               # fontsize=12, frameon=False, ncol=2)
+    plt.title(df_xform.columns[col] + '_xform' + str(int(df_raw.iloc[0, col])),
+              fontsize=18)
+    plt.show()
+
+
 class MacroDataProcess:
     # Stationarity transofrmation
     # Add lag of the features
@@ -125,26 +144,35 @@ class MacroDataProcess:
         code: int or float
         """
         if code == 1:
+            # Level (i.e. no transform): x(t)
             df_col.apply(lambda x: x)
             return df_col
         elif code == 2:
+            # First difference: x(t)-x(t-1)
             df_col = df_col.diff()
             return df_col
         elif code == 3:
+            # Second difference: (x(t)-x(t-1))-(x(t-1)-x(t-2))
             df_col = df_col.diff(periods=2)
             return df_col
         elif code == 4:
+            # Natural log: ln(x)
             df_col = df_col.apply(np.log)
             return df_col
         elif code == 5:
+            # First difference of natural log: ln(x)-ln(x-1)
             df_col = df_col.apply(np.log)
-            df_col = df_col.diff(periods=2)
+            df_col = df_col.diff()
             return df_col
         elif code == 6:
+            # Second difference of natural log:
+            # (ln(x)-ln(x-1))-(ln(x-1)-ln(x-2))
             df_col = df_col.apply(np.log)
             df_col = df_col.diff(periods=2)
             return df_col
         elif code == 7:
+            # First difference of percent change:
+            # (x(t)/x(t-1)-1)-(x(t-1)/x(t-2)-1)
             df_col = df_col.pct_change()
             df_col = df_col.diff()
             return df_col
@@ -157,6 +185,7 @@ class MacroDataProcess:
         for col in self.data.columns:
             df_tmp[col] = self.data[col].iloc[1:]
             transformation_codes[col] = self.data[col].iloc[0]
+            # transformation code in first row
         df_tmp['Date'] = pd.to_datetime(df_tmp['Date'])
 
         self.data = df_tmp
@@ -248,7 +277,8 @@ def process_data(df_clean):
 
     1 Convert the features into stationary form by applying the necessary
     2 Transformations as stated in the appendix by authors (see notebook).
-    3 Add 1, 3, 6, 9, 12 months lags of the features
+    3 Add 1, 3, 6, 9, 12 months lags of the features (add lag also forward
+                                                      fills data)
     """
     print('Processing data...')
     df = MacroDataProcess(macro_data=df_clean)
@@ -381,7 +411,8 @@ if __name__ == '__main__':
 
     # =========================================================================
     # Clean and process data
-
+    # site with background information
+    # https://research.stlouisfed.org/econ/mccracken/fred-databases/
     url = 'https://files.stlouisfed.org/files/htdocs/fred-md/monthly/current'
     url = url + '.csv'
     df_macro = pd.read_csv(url)
@@ -413,7 +444,14 @@ if __name__ == '__main__':
     target_col = 'Regime'
     feature_col = df.columns.drop(['Regime', 'Date'])
 
-    # %% Cross-Validation
+    # to see plots of clean data vs. transformed (stationary) data
+    # adjust columns as desired; there are 118 columns in df without the
+    # lags or Date included
+    for i in range(1, len(df_clean.columns[0:10])):
+        plot_data(df_process.Date, df_clean, df_process, i)
+
+
+    # %% 2nd cell: Cross-Validation
     model_dict_cv =\
         {('LR', LogisticRegression): {'solver': ['saga'],
                                       'penalty': ['none'],
@@ -445,39 +483,42 @@ if __name__ == '__main__':
     end = time.time()
     print(f'\nTime to execute cross validation: {round(end-start, 1)} seconds')
 
-# =============================================================================
-# as of 5/16/21 run
-# {('LR', sklearn.linear_model._logistic.LogisticRegression):
-#    {'solver': 'saga', 'penalty': 'none', 'max_iter': 100},
+    # =========================================================================
+    # as of 5/16/21 run
+    # {('LR', sklearn.linear_model._logistic.LogisticRegression):
+    #    {'solver': 'saga', 'penalty': 'none', 'max_iter': 100},
 
-#  ('LR_l1', sklearn.linear_model._logistic.LogisticRegression):
-#   {'solver': 'saga', 'max_iter': 100, 'penalty': 'l1', 'C': 0.01},
+    #  ('LR_l1', sklearn.linear_model._logistic.LogisticRegression):
+    #   {'solver': 'saga', 'max_iter': 100, 'penalty': 'l1', 'C': 0.01},
 
-#  ('LR_l2', sklearn.linear_model._logistic.LogisticRegression):
-#    {'solver': 'saga', 'max_iter': 100, 'penalty': 'l2', 'C': 0.0001},
+    #  ('LR_l2', sklearn.linear_model._logistic.LogisticRegression):
+    #    {'solver': 'saga', 'max_iter': 100, 'penalty': 'l2', 'C': 0.0001},
 
-#  ('DT', sklearn.tree._classes.DecisionTreeClassifier):
-#    {'max_depth': 10, 'splitter': 'random', 'min_samples_split': 5},
+    #  ('DT', sklearn.tree._classes.DecisionTreeClassifier):
+    #    {'max_depth': 10, 'splitter': 'random', 'min_samples_split': 5},
 
-#  ('RF', sklearn.ensemble._forest.RandomForestClassifier):
-#    {'random_state': 42, 'max_depth': 3, 'n_estimators': 200},
+    #  ('RF', sklearn.ensemble._forest.RandomForestClassifier):
+    #    {'random_state': 42, 'max_depth': 3, 'n_estimators': 200},
 
-#  ('XGB', xgboost.sklearn.XGBClassifier):
-#    {'booster': 'gbtree', 'max_depth': 3, 'n_estimators': 100,
-#   'random_state': 42, 'objective': 'binary:logistic'}}
-# =============================================================================
+    #  ('XGB', xgboost.sklearn.XGBClassifier):
+    #    {'booster': 'gbtree', 'max_depth': 3, 'n_estimators': 100,
+    #   'random_state': 42, 'objective': 'binary:logistic'}}
+    # =========================================================================
 
-    # %% Out-of-sample Prediction
+    # %% 3rd cell: Out-of-sample Prediction
     # the below takes 10 minutes or so
     # Out-of-sample predictions are performed on a rolling window basis.
     # Model performances are evaluated with error metrics and recession
     # prediction probabilities are visualized after that.
     start = time.time()
     err_df_rolling, res_rolling_all =\
-        test_out_of_sample(df, model_dict, feature_col,
-                           target_col, split_date)
+        test_out_of_sample(df, model_dict, feature_col, target_col, split_date)
+    end = time.time()
+    print(f'\nDuration of Out of sample predictions: '
+          f'{round(end-start, 1)/60} min')
 
     # =========================================================================
+    # The following is an example of what the outputs look like:
     # err_df_rolling data frame
     #   ACC  MCC   QPS   AUC   Model
     # 0.878  0.50  0.09  0.86   LR
@@ -486,10 +527,16 @@ if __name__ == '__main__':
     # 0.xx   0.xx  0.xx  0.xx   DT
     # 0.xx   0.xx  0.xx  0.xx   RF
     # 0.xx   0.xx  0.xx  0.xx   XGB
+
+    # res_rolling_all
+    # probabilities of crash regime in each model column
+    #
+    #       Date  Regime  LR      LR-L1   ...  RF    XGB
+    # 1973-01-01  0.0     3.4e-9  ...     ...  ..     ..
+    #  ...
+    # 2021-02-01  1.0     0.064   ...          0.64  0.83
+
     # =========================================================================
-    end = time.time()
-    print(f'\nDuration of Out of sample predictions: '
-          f'{round(end-start, 1)/60} min')
 
     fig, axs = plt.subplots(1, 4, figsize=(24, 4))
     for idx, name in enumerate(err_df_rolling.columns.drop('Model')):
@@ -500,9 +547,9 @@ if __name__ == '__main__':
     plt.show()
 
     for model in list(model_dict.keys()):
-        df = RegimePlot(df=res_rolling_all, regime_col='Regime')
-        df.plt_regime(plt_series=[model[0]], series_label=[model[0]],
-                      regime_label='Recession',
-                      orj_series=True, log_scale=False,
-                      title='Recession Prediction Probabilities with '
-                      + model[0])
+        df_to_plot = RegimePlot(df=res_rolling_all, regime_col='Regime')
+        df_to_plot.plt_regime(plt_series=[model[0]], series_label=[model[0]],
+                              regime_label='Recession',
+                              orj_series=True, log_scale=False,
+                              title='Recession Prediction Probabilities with '
+                              + model[0])
