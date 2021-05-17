@@ -10,6 +10,8 @@ This folder is for "Module 5: Regime Prediction with Machine Learning". The nece
 
 ```regimeplot.py``` Custom plotting function with regimes
 
+```regime_predict_refactor.py``` Notebooks Part 1-3 and regimeplot.py all rolled into one file
+
 ```2021_03_Part1.ipynb``` Updated May 13, 2021 for most recent macro data (March 2021)
 
 ```2021_03_Part2.ipynb``` ditto
