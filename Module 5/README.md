@@ -25,7 +25,8 @@ This folder includes the dataset that are used in the analysis.  Dated files wil
 1. ```macro_raw.csv``` Raw macroeconomic features.  Downloaded from https://research.stlouisfed.org/econ/mccracken/fred-databases/.
 2. ```macro_processed.csv``` Cleaned and processed macroeconomic features that we get after running ```Part2.ipynb```.
 2. ```sp500.csv``` SP500 total returns closing prices from Yahoo finance for the month, even though date of each row is first day of month. 
-3. ```recession_dates.csv``` Recession dates during the sample period from NBER. Label 1 is used for recession and 0 for expansion periods.
+3. ```recession_dates.csv``` Recession dates during the sample period from NBER. Label 1 is used for recession and 0 for expansion periods. Source:  https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions
+
 4. ```2021_03_macro_raw.csv```  Raw macro features updated as of March 2021
 5. ```2021_03_macro_processed.csv```  Cleaned and processed macroeconomic features that we get after running ```Part2.ipynb```.  Note that the last period of this file is February 2021, due to the cleaning / processing of the raw data.
 
